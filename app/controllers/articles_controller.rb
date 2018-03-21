@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-	  # 展示文章 传入文章ID来找到文章对象
+	  # 展示文章 传入文章ID来找到文章对象de
 		@article = Article.find(params[:id])
 		# 文章对象调用comments方法得到文章所有评论
 		@comments = @article.comments
