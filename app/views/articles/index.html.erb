@@ -6,7 +6,11 @@
     <th>Text</th>
     <th colspan="3"></th>
   </tr>
-
+   <p>
+    <form action="/articles" method="get">
+     <span>搜索文章：</span><input type="text" name='q' style="height:20px;width:100px;" />
+     <button type="submit">搜索</button>
+</form>
   <% @articles.each do |article| %>
     <tr>
       <td><%= article.title %></td>
@@ -17,5 +21,7 @@
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
     </tr>
+
   <% end %>
-</table>
+</table></br>
+<%= paginate @articles %> 

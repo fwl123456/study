@@ -1,0 +1,41 @@
+<html lang="en" class="">
+  <head>
+    <meta charset="utf-8" />
+    <title>后台登录</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/app.min.css" type="text/css" />
+  </head>
+  <body>
+    <div class="app app-header-fixed ">
+      <div class="container w-xxl w-auto-xs">
+        <a href class="navbar-brand block m-t">文章管理</a>
+        <div class="m-b-xs">
+          <div class="wrapper text-center">
+          </div>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-validation"}) do |f| %>
+            <div class="text-danger wrapper text-center">
+              <%= notice %><%= alert %>
+            </div>
+            <div class="list-group list-group-sm">
+              <div class="list-group-item">
+                <input type="email" placeholder="电子邮箱" name="user[email]" id="manager_email" class="form-control no-border"  required>
+              </div>
+              <div class="list-group-item">
+                <input type="password" placeholder="密码" name="user[password]" id="manager_password" class="form-control no-border"  required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+            <div class="line line-dashed"></div>
+          <% end %>
+        </div>
+        <div class="text-center">
+          <p>
+          <small class="text-muted">技术支持：行者网络 &copy; 2015 - 2017</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
+
 	def index
-		@articles = Article.all		
+		query_text = params[:q]
+		if query_text.blank?
+			@articles = Article.all.page params[:page]	
+		else
+			# 显示当前页数页面的文章
+			@articles = Article.where(title: /#{query_text}/).page params[:page]		
+		end
 	end
 
 	def show
@@ -40,6 +48,14 @@ class ArticlesController < ApplicationController
   	@article = Article.find(params[:id])
   	@article.destroy
   	redirect_to articles_path
+  end
+
+  def search
+  	@article = Article.find(params[:text])
+  	if @article
+  		redirect_to article_path(@article)
+  	else
+  	end
   end
   
 	private

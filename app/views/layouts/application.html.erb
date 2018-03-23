@@ -9,6 +9,13 @@
   </head>
 
   <body>
+  	 <% if user_signed_in?  %>
+        <%= link_to '退出', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+     <% else %>
+        <%= link_to '登录', new_user_session_path %>
+    <% end %>
+    
+       <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
