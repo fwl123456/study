@@ -6,6 +6,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <td>欢迎您,</td>
+  <%= current_user&.name %>
+  <br>
+  <td><%= link_to '个人中心', user_path%></td>
+  <td><%= link_to '返回', articles_path%></td>
   </head>
 
   <body>
@@ -17,5 +22,6 @@
     
        <p class="alert"><%= alert %></p>
     <%= yield %>
+ 
   </body>
 </html>

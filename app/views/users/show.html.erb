@@ -1,0 +1,20 @@
+<p>
+  <strong>name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>age:</strong>
+  <%= @user.age %>
+</p>
+
+<p>
+	<strong>sex:</strong>
+	<%= @user.sex %>
+</p>
+
+<p>
+	<strong>email:</strong>
+	<%= @user.email %>
+</p>
+<%= link_to 'edit', edit_user_path(@user) %>

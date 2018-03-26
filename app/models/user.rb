@@ -36,4 +36,8 @@ class User
   field :name, type: String
   field :age, type: Integer
   field :sex, type: String
+  validates :name, presence: true, # 确保User必须有name
+                   length: { minimum: 2 } #名字长度不少于2
 end
+
+# <%= current_user.name %>

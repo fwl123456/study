@@ -2,11 +2,15 @@ class ArticlesController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
 
 	def index
+		# 把网页提交的参数给query_text装起来
 		query_text = params[:q]
+		# 判断如果内容为空
 		if query_text.blank?
+		# 就显示当前页面文章
 			@articles = Article.all.page params[:page]	
 		else
-			# 显示当前页数页面的文章
+		# 显示当前页数页面的文章
+		# 否则把参数传到Article里面查找并把页面显示出来  /#{query_text}/为模糊查询
 			@articles = Article.where(title: /#{query_text}/).page params[:page]		
 		end
 	end
@@ -50,14 +54,6 @@ class ArticlesController < ApplicationController
   	redirect_to articles_path
   end
 
-  def search
-  	@article = Article.find(params[:text])
-  	if @article
-  		redirect_to article_path(@article)
-  	else
-  	end
-  end
-  
 	private
 	
 	def article_params

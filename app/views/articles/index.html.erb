@@ -5,10 +5,12 @@
     <th>Title</th>
     <th>Text</th>
     <th colspan="3"></th>
-  </tr>
-   <p>
+  </tr><br/>
+
     <form action="/articles" method="get">
+ <!-- 提交form表单  action指示提交到articles控制层，提交方法是get请求 -->
      <span>搜索文章：</span><input type="text" name='q' style="height:20px;width:100px;" />
+     <!-- type规定提交类型，q是提交的参数 -->
      <button type="submit">搜索</button>
 </form>
   <% @articles.each do |article| %>
