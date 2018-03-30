@@ -26,4 +26,44 @@
 
   <% end %>
 </table></br>
-<%= paginate @articles %> 
+<%= paginate @articles %><br>
+<form action="/articles" method="get">
+     <span>请输入城市：</span><input type="string" name='city' style="height:20px;width:100px;" />
+     <!-- type规定提交类型，q是提交的参数 -->
+     <button type=s"submit">查询天气</button>
+</form>
+
+<p class="ppp"></p>
+<p class="ppp">fdsfdsfd</p>
+<table>
+    <tr>
+      <td>城市:</td>
+      <td><%= @weather['city'] %></td>
+    </tr>
+   <tr>
+      <td>温度:</td>
+      <td><%= @weather['temperature'] %></td>
+    </tr>
+    <tr>
+      <td>天气:</td>
+      <td><%= @weather['weather'] %></td>
+    </tr>
+    <tr>
+      <td>风级:</td>
+      <td><%= @weather['wind'] %></td>
+    </tr>  
+    <tr>
+      <td>风级:</td>
+      <td><%= @weather['wind'] %></td>
+    </tr>
+    <tr>
+      <td>穿衣建议:</td>
+      <td><%= @weather['dressing_advice'] %></td>
+    </tr> 
+</table>
+  
+<style type="text/css">
+  .ppp {
+    margin: 0px;
+  }
+</style>

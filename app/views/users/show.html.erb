@@ -17,4 +17,8 @@
 	<strong>email:</strong>
 	<%= @user.email %>
 </p>
-<%= link_to 'edit', edit_user_path(@user) %>
+<p>
+	<strong>image:</strong>
+	<%=image_tag @user.image_url %>
+</p>
+<%= link_to 'edit', edit_user_path() %>

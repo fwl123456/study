@@ -38,6 +38,10 @@ class User
   field :sex, type: String
   validates :name, presence: true, # 确保User必须有name
                    length: { minimum: 2 } #名字长度不少于2
+
+# 图片
+  mount_uploader :image, AvatarUploader
 end
+
 
 # <%= current_user.name %>
