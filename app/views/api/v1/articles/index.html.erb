@@ -5,10 +5,10 @@
     <th>Title</th>
     <th>Text</th>
     <th>创建时间:</th>
-    <!-- 点击时间后↓, 发送desc参数到articles控制层 -->
-    <th><%= link_to '时间↓', articles_path(order: :desc)%></th> 
-    <!-- 点击时间后,  发送asc参数到articles控制层 -->
-    <th><%= link_to '时间↑', articles_path(order: :asc) %></th>
+    <!-- 点击时间后↓,调用Articles控制层sort方法进行倒序排序 -->
+    <th><%= link_to '时间↓', desc_articles_url %></th> 
+    <!-- 点击时间后,调用Articles控制层sort1方法进行正序排序 -->
+    <th><%= link_to '时间↑', asc_articles_url %></th>
     <th colspan="3"></th>
   </tr><br/>
 

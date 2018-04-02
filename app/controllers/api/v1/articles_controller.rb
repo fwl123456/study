@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class Api::V1::ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
 
   def index
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
       @articles = Article.where(title: /#{query_text}/).page params[:page]
     end
     @weather = Weather.get_weather(params[:city])
-    @articles = Article.all.order(created_at: params[:order]).page params[:page] unless params[:order].blank?  
+    @articles = Article.all.order(created_at: params[:order]).page params[:page] unless params[:order].blank?
   end
 
   def show

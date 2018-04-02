@@ -1,5 +1,6 @@
 class Article
   include Mongoid::Document
+  include Mongoid::Timestamps
   paginates_per 5
   field :title, type: String
   field :text, type: String
