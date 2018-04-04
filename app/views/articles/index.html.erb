@@ -33,11 +33,11 @@
 
   <% end %>
   <p>
+
       <strong>文章标签:</strong>
-  <%= link_to '生活', articles_path(name: :"生活")%>&nbsp
-  <%= link_to '娱乐', articles_path(name: :"娱乐")%>&nbsp
-  <%= link_to '游戏', articles_path(name: :"游戏")%>&nbsp
-  <%= link_to '其他', articles_path(name: :"其他")%>  
+      <% Label.all.each do |label| %>
+  <%= link_to label.name, articles_path(label_id: label.id.to_s)%>
+  <% end %>
   </p>
 </table></br>
 <%= paginate @articles %><br>

@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     #文章排序 看前端传入的是order是倒序还是正序进行排序
     @articles = Article.all.order(created_at: params[:order]) unless params[:order].blank?  
     # 从label标签中找到前端传过来的labelname对应的标签，然后找到对应标签的所有文章赋值给文章对象
-    @articles = Label.find_by(name: params[:name]).articles unless params[:name].blank?
+    @articles = Label.find(params[:label_id]).articles unless params[:label_id].blank?
     # 显示当前文章分页功能
     @articles = @articles.page params[:page]
   end
