@@ -13,6 +13,9 @@
       </ul>
     </div>
   <% end %>
+  
+<%= form.collection_select(:label_ids, @labels, :id, :name,{} ,{:multiple => true}) %>
+  <%#= select_tag(:city_id, options_for_select(@labels)) %>
 
   <p>
     <%= form.label :title %><br>
@@ -23,9 +26,16 @@
     <%= form.label :text %><br>
     <%= form.text_area :text %>
   </p>
+  
 
+  <!-- <form.select  id="sid" onchange="selectcity()">  
+            <option>-文章分类-</option>  
+            <option>游戏</option>  
+            <option>技术</option>  
+            <option>娱乐</option>  
+            <option>其他</option>  
+  </select> --> 
   <p>
     <%= form.submit %>
   </p>
-
 <% end %>

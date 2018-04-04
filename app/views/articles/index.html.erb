@@ -5,13 +5,13 @@
     <th>Title</th>
     <th>Text</th>
     <th>创建时间:</th>
+    <th>文章标签:</th>
     <!-- 点击时间后↓, 发送desc参数到articles控制层 -->
-    <th><%= link_to '时间↓', articles_path(order: :desc)%></th> 
+    <th class="aaa"><%= link_to '时间↓', articles_path(order: :desc)%></th> 
     <!-- 点击时间后,  发送asc参数到articles控制层 -->
     <th><%= link_to '时间↑', articles_path(order: :asc) %></th>
     <th colspan="3"></th>
   </tr><br/>
-
     <form action="/articles" method="get">
  <!-- 提交form表单  action指示提交到articles控制层，提交方法是get请求 -->
      <span>搜索文章：</span><input type="text" name='q' style="height:20px;width:100px;" />
@@ -23,6 +23,7 @@
       <td><%= article.title %></td>
       <td><%= article.text %></td>
       <td><%= article.created_at %></td>
+      <td><%= article.labels.map(&:name)%></td>
       <td><%= link_to 'Show', article_path(article) %></td>
       <td><%= link_to 'Edit', edit_article_path(article) %></td>
       <td><%= link_to 'Destroy', article_path(article),
@@ -31,6 +32,13 @@
     </tr>
 
   <% end %>
+  <p>
+      <strong>文章标签:</strong>
+  <%= link_to '生活', articles_path(name: :"生活")%>&nbsp
+  <%= link_to '娱乐', articles_path(name: :"娱乐")%>&nbsp
+  <%= link_to '游戏', articles_path(name: :"游戏")%>&nbsp
+  <%= link_to '其他', articles_path(name: :"其他")%>  
+  </p>
 </table></br>
 <%= paginate @articles %><br>
 <form action="/articles" method="get">
@@ -76,4 +84,8 @@
   .ppp {
     margin: 0px;
   }
+/*  .aaa {
+    position: relative;
+    right: -20%;
+  }*/
 </style>

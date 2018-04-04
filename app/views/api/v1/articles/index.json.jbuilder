@@ -3,4 +3,5 @@ json.article @articles do |article|
 	json.title article.title
 	json.text article.text
 	json.created_at article.created_at
+	json.label_ids article.label_ids
 end

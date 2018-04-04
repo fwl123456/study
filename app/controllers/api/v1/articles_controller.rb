@@ -1,5 +1,6 @@
 class Api::V1::ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
+  before_action :set_labels, only: [:new, :create, :edit, :update]
 
   def index
     # 把网页提交的参数给query_text装起来
@@ -69,6 +70,10 @@ class Api::V1::ArticlesController < ApplicationController
   # end
 
   private
+
+  def set_labels
+    @labels = Label.all
+  end
 
   def article_params
     params.require(:article).permit(:title, :text)

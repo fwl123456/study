@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
+  before_action :set_labels, only: [:new, :create, :edit, :update]
 
   def index
     # 把网页提交的参数给query_text装起来
@@ -13,8 +14,14 @@ class ArticlesController < ApplicationController
       # 否则把参数传到Article里面查找并把页面显示出来  /#{query_text}/为模糊查询
       @articles = Article.where(title: /#{query_text}/).page params[:page]
     end
+    # 天气查询传入城市名查询天气
     @weather = Weather.get_weather(params[:city])
-    @articles = Article.all.order(created_at: params[:order]).page params[:page] unless params[:order].blank?  
+    #文章排序 看前端传入的是order是倒序还是正序进行排序
+    @articles = Article.all.order(created_at: params[:order]) unless params[:order].blank?  
+    # 从label标签中找到前端传过来的labelname对应的标签，然后找到对应标签的所有文章赋值给文章对象
+    @articles = Label.find_by(name: params[:name]).articles unless params[:name].blank?
+    # 显示当前文章分页功能
+    @articles = @articles.page params[:page]
   end
 
   def show
@@ -69,9 +76,12 @@ class ArticlesController < ApplicationController
   # end
 
   private
+  def set_labels
+    @labels = Label.all
+  end
 
   def article_params
-    params.require(:article).permit(:title, :text)
-    # 设置提交参数为title text
+    params.require(:article).permit(:title, :text, label_ids: [])
+    # 设置提交参数为title text label_ids
   end
 end
