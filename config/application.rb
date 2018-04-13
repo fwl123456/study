@@ -18,6 +18,19 @@ Bundler.require(*Rails.groups)
 
 module Study
   class Application < Rails::Application
+  	config.to_prepare do
+      # Load application's model / class decorators
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+    end
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture false
+      g.factory_bot true
+      g.factory_bot dir: 'spec/factories'
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 

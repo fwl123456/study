@@ -36,6 +36,7 @@ class User
   field :name, type: String
   field :age, type: Integer
   field :sex, type: String
+  has_many :articles # 用户包含多篇文章
   validates :name, presence: true, # 确保User必须有name
                    length: { minimum: 2 } #名字长度不少于2
 

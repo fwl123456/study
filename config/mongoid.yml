@@ -162,3 +162,6 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+  options:
+    belongs_to_required_by_default: false
+    raise_not_found_error: false

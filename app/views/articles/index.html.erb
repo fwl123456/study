@@ -33,7 +33,6 @@
 
   <% end %>
   <p>
-
       <strong>文章标签:</strong>
       <% Label.all.each do |label| %>
   <%= link_to label.name, articles_path(label_id: label.id.to_s)%>
