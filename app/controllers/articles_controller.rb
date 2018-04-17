@@ -29,6 +29,8 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     # 文章对象调用comments方法得到文章所有评论
     @comments = @article.comments
+    Article.read(@user)
+    @readers = @article.readers
   end
 
   def new

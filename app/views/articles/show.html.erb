@@ -12,6 +12,12 @@
 <p><strong>lable:</strong>
 	<!-- 取出article对象中的所有标签，装换成map集合，取出集合中的name -->
 <%=@article.labels.map(&:name)%></p>
+<p>
+	<strong>readers:</strong><br>
+	<% @readers.each do |user| %>
+	<%= user.name %><br>
+	<% end %>
+</p>
 
 <h2>Comments</h2>
 <%= render @article.comments %>
