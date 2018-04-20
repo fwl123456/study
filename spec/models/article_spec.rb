@@ -38,9 +38,17 @@ RSpec.describe Article, type: :model do
     it '查看所有浏览过文章的用户' do
       @article.read(@user)
       @article.read(@user1)
-      expect(@article.readers.count).to eq 2
-      expect(@article.readers).to eq [@user, @user1]
+      expect(@article.read_numbers).to eq 2
+      expect(@article.select_readers).to eq [@user, @user1]
     end
-  
-	end
+
+
+    it '验证文章标题不能为空' do
+    @article = build(:article, title: '', text: "This is a text2")
+    expect(@article.valid?).to be false
+    expect(@article.errors[:title].any?).to be true
+    expect(@article.errors[:title].first).to eq "can't be blank"
+    expect(@article.errors[:title].last).to eq "is too short (minimum is 5 characters)" 
+    end
+  end
 end

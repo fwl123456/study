@@ -9,7 +9,10 @@
  <!--    <td>欢迎您,</td>
 <%= current_user&.name %> -->
   <td><%= link_to '个人中心', user_path%></td>
-  <td><%= link_to '返回', articles_path%></td>
+  <% if current_user %>
+ <td><%= link_to '我的文章', articles_path(user_id: current_user.id.to_s) %></td>
+ <% end%>
+ <td><%= link_to '返回', articles_path%></td>
   </head>
 
   <body>

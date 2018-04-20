@@ -20,21 +20,29 @@ class ArticlesController < ApplicationController
     @articles = Article.all.order(created_at: params[:order]) unless params[:order].blank?  
     # 从label标签中找到前端传过来的labelname对应的标签，然后找到对应标签的所有文章赋值给文章对象
     @articles = Label.find(params[:label_id]).articles unless params[:label_id].blank?
+    # 显示当前用户的文章
+    @articles = Article.where(user_id: params[:user_id]) unless params[:user_id].blank?  
     # 显示当前文章分页功能
     @articles = @articles.page params[:page]
+  end
+
+   # 显示当前用户的文章
+  def my_articles
+     @articles = current_user.articles
   end
 
   def show
     # 展示文章 传入文章ID来找到文章对象de
     @article = Article.find(params[:id])
     # 文章对象调用comments方法得到文章所有评论
+    @article.read(current_user)
+    puts "+++++++++++++!!!!!!!!!!!!!!!!#{@article.readers}"
     @comments = @article.comments
-    Article.read(@user)
-    @readers = @article.readers
+    @readers = User.find(@article.readers)
   end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.new
   end
 
   def edit
@@ -42,9 +50,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
     if @article.save
-      redirect_to articles_path
+       redirect_to articles_path
     else
       render 'new'
     end
@@ -83,7 +91,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :text, label_ids: [])
+    params.require(:article).permit(:title, :text, label_ids: [] )
     # 设置提交参数为title text label_ids
   end
 end

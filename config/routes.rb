@@ -11,13 +11,8 @@ Rails.application.routes.draw do
   end
 
   resources :articles do # 文章资源
- 		resources :comments
- 		collection do  # 全部
- 			get :desc    #desc方法是get请求
- 			get :asc		 #asc方法是get请求
- 		end
-  resources :labels
-
+    resources :comments 
+    resources :labels
  	end
  	resource :user # 用户资源
   root to: 'articles#index' # 告诉Rails对根路径的访问请求应该发往welcome控制器的index动作
