@@ -24,7 +24,7 @@ class Article
   # 查看浏览过文章的所有人
   def select_readers
     user_ids = $redis.smembers "article:#{self.id.to_s}:read_numbers"
-    User.find(user_ids)
+    self.readers = User.find(user_ids)
   end
   # 保存浏览过文章的人到readers
 

@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :index]
   before_action :set_labels, only: [:new, :create, :edit, :update]
-
+  load_and_authorize_resource
   def index
     # 把网页提交的参数给query_text装起来
     query_text = params[:q]
@@ -36,7 +36,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     # 文章对象调用comments方法得到文章所有评论
     @article.read(current_user)
-    puts "+++++++++++++!!!!!!!!!!!!!!!!#{@article.readers}"
     @comments = @article.comments
     @readers = User.find(@article.readers)
   end

@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  ROLES = [:admin, :user, :collecter]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -36,12 +37,21 @@ class User
   field :name, type: String
   field :age, type: Integer
   field :sex, type: String
+  # 角色
+  field :role, type: String
   has_many :articles # 用户包含多篇文章
+  # has_and_belongs_to_many :followers  # 一个用户可以关注多个用户 多个用户可以关注一个用户
   validates :name, presence: true, # 确保User必须有name
                    length: { minimum: 2 } #名字长度不少于2
 
+ 
+  def admin?
+    role == 'admin'
+  end
+
 # 图片
   mount_uploader :image, AvatarUploader
+
 end
 
 
