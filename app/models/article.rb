@@ -18,6 +18,7 @@ class Article
     if result == true
         self.inc(read_numbers: 1)
         reader = self.readers
+        # 保存浏览过文章的人到readers
         self.update(readers: reader.push(user.id.to_s))
     end
   end
@@ -26,7 +27,6 @@ class Article
     user_ids = $redis.smembers "article:#{self.id.to_s}:read_numbers"
     self.readers = User.find(user_ids)
   end
-  # 保存浏览过文章的人到readers
 
 
 end
