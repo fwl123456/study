@@ -64,7 +64,7 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :'sidekiq:restart'
+      # invoke :'sidekiq:restart'
       invoke :'puma:restart'
     end
   end
