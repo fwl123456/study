@@ -41,12 +41,14 @@ class UsersController < ApplicationController
   end
 
   def follow
+    # 通过网页传来的id找到要关注的用户对象传入方法进行关注
     follower = User.find(params[:id])
     current_user.follow(follower)
     redirect_to followers_user_path(current_user)
   end
 
   def unfollow
+    # 通过网页传来的id找到要取消关注的用户对象传入方法进行取消关注
     follower = User.find(params[:id])
     current_user.unfollow(follower)
     redirect_to followers_user_path(current_user)

@@ -67,3 +67,7 @@ gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'carrierwave-upyun'
 gem 'cancancan'
+# 自动部署
+gem 'mina'
+gem 'mina-sidekiq', require: false
+gem 'mina-puma', require: false

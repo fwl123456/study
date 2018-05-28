@@ -70,5 +70,13 @@ RSpec.describe User, type: :model do
 			expect(@user2.followings_count).to eq 1
 			expect(result[:status]).to eq -1
 		end
+		
+		it '用户自己对自己进行关注' do
+			@user1 = create(:user, name: 'user1', email: 'user1@aaa.com')
+			result = @user1.follow(@user1)
+			expect(@user1.followers_count).to eq 0
+			expect(@user1.followings_count).to eq 0
+			expect(result[:status]).to eq -2
+		end
 	end
 end
