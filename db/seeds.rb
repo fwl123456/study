@@ -1,0 +1,1 @@
+User.create(email: "admin@lindo.io", password: "123123", name: "张三")
