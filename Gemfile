@@ -60,6 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid', '~> 6.4.0'
 gem 'mongoid_paranoia'
 gem 'mongoid_orderable'
+gem 'mongoid_search'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'devise'

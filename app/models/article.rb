@@ -4,17 +4,22 @@ class Article
   include Mongoid::Paranoia
   include Mongoid::Timestamps
   include Mongoid::Orderable
+  include Mongoid::Search
   paginates_per 5
   field :title, type: String
   field :text, type: String
   field :read_numbers, type: Integer, default: 0
+  field :autor_name, type: String
   field :readers, type: Array, default: []
   belongs_to :user # 文章属于用户
   has_many :comments, dependent: :destroy # 文章包含评论 一篇文章可以有多条评论 dependent 删除关联对象 文章删除后，文章评论也应该删除
   has_and_belongs_to_many :labels
-
+  # has_and_belongs_to_many :readers, class_name: 'Article',  inverse_of: :articles
   validates :title, presence: true, # 确保文章必须有标题
-                    length: { minimum: 5 } # 标题长度不少于5
+            length: { minimum: 5 } # 标题长度不少于5
+  # 全局搜索加入的条件：标题，内容，阅读者，用户
+  search_in :title, :text, :autor_name, readers: [:name]
+
   orderable
   # 浏览方法，传入一个文章对象
   def read(user)

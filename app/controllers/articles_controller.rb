@@ -12,7 +12,8 @@ class ArticlesController < ApplicationController
     else
       # 显示当前页数页面的文章
       # 否则把参数传到Article里面查找并把页面显示出来  /#{query_text}/为模糊查询
-      @articles = Article.where(title: /#{query_text}/).page params[:page]
+      # @articles = Article.where(title: /#{query_text}/).page params[:page]
+      @articles = Article.full_text_search(query_text).page params[:page]
     end
     # 天气查询传入城市名查询天气
     @weather = Weather.get_weather(params[:city])
@@ -21,7 +22,8 @@ class ArticlesController < ApplicationController
     # 从label标签中找到前端传过来的labelname对应的标签，然后找到对应标签的所有文章赋值给文章对象
     @articles = Label.find(params[:label_id]).articles unless params[:label_id].blank?
     # 显示当前用户的文章
-    @articles = Article.where(user_id: params[:user_id]) unless params[:user_id].blank?  
+    @articles = Article.where(user_id: params[:user_id]) unless params[:user_id].blank?
+    # @articles = Article.where(autor_name: current_user.name)  
     # 显示当前文章分页功能
     @articles = @articles.order(position: :asc)
     @articles = @articles.page(params[:page])
@@ -82,7 +84,8 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.new(article_params)
     if @article.save
-       redirect_to articles_path
+      @article.update(autor_name: current_user.name)
+      redirect_to articles_path
     else
       render 'new'
     end
@@ -146,7 +149,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :text, label_ids: [] )
+    params.require(:article).permit(:title, :text, :autor_name, label_ids: [] )
     # 设置提交参数为title text label_ids
   end
 end

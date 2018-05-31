@@ -95,6 +95,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
+    fast-stemmer (1.0.2)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -158,6 +159,9 @@ GEM
       mongoid-compatibility
     mongoid_paranoia (0.3.0)
       mongoid (>= 6.0.0)
+    mongoid_search (0.3.5)
+      fast-stemmer (~> 1.0.0)
+      mongoid (>= 3.0.0)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
@@ -305,6 +309,7 @@ DEPENDENCIES
   mongoid (~> 6.4.0)
   mongoid_orderable
   mongoid_paranoia
+  mongoid_search
   puma (~> 3.7)
   rails (~> 5.1.5)
   redis (~> 4.0)
