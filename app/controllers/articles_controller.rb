@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
     @article = Article.unscoped.all.find(params[:id]) 
     if @article.deleted_at == nil 
       @article.destroy
-      redirect_to articles_path, notice: "文章已放入回收站，7天后自动删除"
+      redirect_to articles_path, notice: "文章已放入回收站，7天后自动删除!"
     else
       @article.destroy!
       redirect_to articles_path, notice: "删除成功！"
@@ -95,6 +95,30 @@ class ArticlesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  # 上一篇文章
+  def previous
+    @article = Article.find(params[:id])
+    if @article.previous_item == nil
+
+    else
+      @article = @article.previous_item
+    end
+    @readers = User.find(@article.readers)
+    render 'show'
+  end
+
+  # 下一篇文章
+  def next
+    @article = Article.find(params[:id])
+    if @article.next_item == nil
+
+    else
+      @article = @article.next_item
+    end
+    @readers = User.find(@article.readers)
+    render 'show'
   end
 
   # def destroy

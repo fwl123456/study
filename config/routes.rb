@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     end
     member do
       post 'restore'
+      get 'previous'
+      get 'next'
     end
  	end
 

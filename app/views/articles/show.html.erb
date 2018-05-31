@@ -12,6 +12,8 @@
 <p><strong>lable:</strong>
 	<!-- 取出article对象中的所有标签，装换成map集合，取出集合中的name -->
 <%=@article.labels.map(&:name)%></p>
+<p><%= link_to '上一篇', previous_article_path(@article) %></p>
+<p><%= link_to '下一篇', next_article_path(@article) %></p>
 <p>
 	<strong>readers:</strong><br>
 	<% @readers.each do |user| %>
