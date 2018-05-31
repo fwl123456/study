@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # put 'users/:id', to: 'users#unfollow'
   # get 'user', to: 'users#show'
   # 用户资源  only只生成show，index，update，edit四个路由，不写默认生成7个
-  resources :users, only: [:index, :update, :edit] do
+  resources :users, only: [:index, :update, :edit, :new, :destory] do
     # member do对用户的单个资源进行操作
     member do
       get 'followers'
@@ -40,6 +40,12 @@ Rails.application.routes.draw do
     # 嵌套资源
     resources :comments 
     resources :labels
+    collection do
+      get 'deleted'
+    end
+    member do
+      post 'restore'
+    end
  	end
 
   root to: 'articles#index' # 告诉Rails对根路径的访问请求应该发往articles控制器的index动作

@@ -6,6 +6,7 @@
     <th>Text</th>
     <th>创建时间:</th>
     <th>文章标签:</th>
+    <th>位置:</th>
     <!-- 点击时间后↓, 发送desc参数到articles控制层 -->
     <th><%= link_to '时间↓', articles_path(order: :desc)%></th> 
     <!-- 点击时间后,  发送asc参数到articles控制层 -->
@@ -25,6 +26,7 @@
       <td><%= article.text %></td>
       <td><%= article.created_at %></td>
       <td><%= article.labels.map(&:name)%></td>
+      <td><%= article.position %></td> 
       <td><%= link_to 'Show', article_path(article) %></td>
       <td>
         <% if current_user.role == "admin"  %>

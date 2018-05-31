@@ -58,6 +58,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mongoid', '~> 6.4.0'
+gem 'mongoid_paranoia'
+gem 'mongoid_orderable'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'devise'

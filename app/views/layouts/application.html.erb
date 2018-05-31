@@ -18,6 +18,7 @@
   <% end%>
   <td><%= link_to '查看所有用户', users_path %></td>
   <td><%= link_to '返回', articles_path %></td>
+  <td><%= link_to '回收站', deleted_articles_path %>
   </head>
 
   <body>
@@ -30,7 +31,5 @@
        <p class="alert"><%= alert %></p>
     <%= yield %>
 
-    
- 
   </body>
 </html>

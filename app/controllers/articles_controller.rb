@@ -23,7 +23,38 @@ class ArticlesController < ApplicationController
     # 显示当前用户的文章
     @articles = Article.where(user_id: params[:user_id]) unless params[:user_id].blank?  
     # 显示当前文章分页功能
-    @articles = @articles.page params[:page]
+    @articles = @articles.order(position: :asc)
+    @articles = @articles.page(params[:page])
+  
+  end
+
+  # 软删除列表
+  def deleted
+    @articles = Article.deleted
+    @articles = @articles.order(created_at: params[:order]) unless params[:order].blank?  
+    @articles = Label.find(params[:label_id]).articles unless params[:label_id].blank?
+    @articles = @articles.order(position: :desc)
+    @articles = @articles.page(params[:page])
+  end
+
+  # 删除
+  def destroy
+    @article = Article.unscoped.all.find(params[:id]) 
+    if @article.deleted_at == nil 
+      @article.destroy
+      redirect_to articles_path, notice: "文章已放入回收站，7天后自动删除"
+    else
+      @article.destroy!
+      redirect_to articles_path, notice: "删除成功！"
+    end
+  end
+
+  # 恢复
+  def restore
+    # 从文章已删除的列表中找到要恢复的对象
+    @article = Article.deleted.find(params[:id])
+    @article.restore
+    redirect_to articles_path, notice: "恢复成功！"
   end
 
    # 显示当前用户的文章
@@ -66,11 +97,12 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
-    redirect_to articles_path
-  end
+  # def destroy
+  #   @article = Article.find(params[:id])
+  #   @article.destroy
+  #   redirect_to articles_path
+  # end
+
   # # 文章降序排序
   # def desc 
   #   @articles = Article.all.order(created_at: :desc).page params[:page]
