@@ -18,6 +18,7 @@
 <% else %>
 <p><%= link_to '喜欢', like_article_path(@article), method: :put %></p>
 <% end %>
+<p><%= link_to 'likers', likers_article_path(@article), method: :get %></p>
 <p>
 	<strong>readers:</strong><br>
 	<% @readers.each do |user| %>

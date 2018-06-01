@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get 'next'
       put 'like'
       put 'unlike'
+      get 'likers'
     end
  	end
 

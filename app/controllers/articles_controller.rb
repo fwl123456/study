@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :index]
   before_action :set_labels, only: [:new, :create, :edit, :update]
-  before_action :set_article, only: [:show, :edit, :update, :previous, :next, :like, :unlike]
+  before_action :set_article, only: [:show, :edit, :update, :previous, :next, :like, :unlike, :likers]
   load_and_authorize_resource
   def index
     # 把网页提交的参数给query_text装起来
@@ -133,6 +133,10 @@ class ArticlesController < ApplicationController
     render 'show'
   end
 
+  def likers
+    user_ids = @article.likers
+    @users = User.find(user_ids)
+  end
   # def destroy
   #   @article = Article.find(params[:id])
   #   @article.destroy

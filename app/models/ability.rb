@@ -5,7 +5,7 @@ class Ability
     if user.admin?
         can :manage, :all
     elsif user.role == 'user'
-        can :read, Article
+        can :manage, Article
         # can :manage, Article, user: user
         can :read, Label
     elsif user.role == 'collecter'
