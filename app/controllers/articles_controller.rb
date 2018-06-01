@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :edit, :destroy, :index]
   before_action :set_labels, only: [:new, :create, :edit, :update]
+  before_action :set_article, only: [:show, :edit, :update, :previous, :next, :like, :unlike]
   load_and_authorize_resource
   def index
     # 把网页提交的参数给query_text装起来
@@ -66,7 +67,7 @@ class ArticlesController < ApplicationController
 
   def show
     # 展示文章 传入文章ID来找到文章对象de
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
     # 文章对象调用comments方法得到文章所有评论
     @article.read(current_user)
     @comments = @article.comments
@@ -78,7 +79,6 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def create
@@ -92,7 +92,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to articles_path
     else
@@ -102,7 +101,6 @@ class ArticlesController < ApplicationController
 
   # 上一篇文章
   def previous
-    @article = Article.find(params[:id])
     if @article.previous_item == nil
 
     else
@@ -114,12 +112,23 @@ class ArticlesController < ApplicationController
 
   # 下一篇文章
   def next
-    @article = Article.find(params[:id])
     if @article.next_item == nil
 
     else
       @article = @article.next_item
     end
+    @readers = User.find(@article.readers)
+    render 'show'
+  end
+  # 喜欢方法
+  def like
+    @article.like current_user
+    @readers = User.find(@article.readers)
+    render 'show'
+  end
+  # 取消喜欢方法
+  def unlike
+    @article.unlike current_user
     @readers = User.find(@article.readers)
     render 'show'
   end
@@ -146,6 +155,10 @@ class ArticlesController < ApplicationController
   private
   def set_labels
     @labels = Label.all
+  end
+
+  def set_article
+    @article = Article.find(params[:id])
   end
 
   def article_params

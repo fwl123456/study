@@ -1,5 +1,4 @@
 <h2>Article</h2>
-
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
@@ -14,6 +13,11 @@
 <%=@article.labels.map(&:name)%></p>
 <p><%= link_to '上一篇', previous_article_path(@article) %></p>
 <p><%= link_to '下一篇', next_article_path(@article) %></p>
+<% if @article.liked? current_user %>
+<p><%= link_to '取消喜欢', unlike_article_path(@article), method: :put %></p>	
+<% else %>
+<p><%= link_to '喜欢', like_article_path(@article), method: :put %></p>
+<% end %>
 <p>
 	<strong>readers:</strong><br>
 	<% @readers.each do |user| %>

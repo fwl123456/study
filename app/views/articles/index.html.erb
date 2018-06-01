@@ -12,6 +12,7 @@
     <!-- 点击时间后,  发送asc参数到articles控制层 -->
     <th><%= link_to '时间↑', articles_path(order: :asc) %></th>
     <th id="bbb">浏览量:</th>
+    <th id= "ddd">喜欢:</th>
     <th colspan="3"></th>
   </tr><br/>
     <form action="/articles" method="get">
@@ -40,6 +41,7 @@
         <% end %>
       </td>
       <td><%= article.read_numbers %></td>
+      <td><%= article.likes %></td>
     </tr>
 
   <% end %>
@@ -102,5 +104,10 @@
     position: relative;
     left: 1.9%
     
+  }
+
+  #ddd{
+    position: relative;
+    left: 3%
   }
 </style>

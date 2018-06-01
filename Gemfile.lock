@@ -154,6 +154,8 @@ GEM
     mongoid-grid_fs (2.3.0)
       mime-types (>= 1.0, < 4.0)
       mongoid (>= 3.0, < 7.0)
+    mongoid-likeable (6.0.0)
+      mongoid (~> 6.1)
     mongoid_orderable (5.1.0)
       mongoid (>= 3.0.0)
       mongoid-compatibility
@@ -307,6 +309,7 @@ DEPENDENCIES
   mina
   mina-puma
   mongoid (~> 6.4.0)
+  mongoid-likeable
   mongoid_orderable
   mongoid_paranoia
   mongoid_search

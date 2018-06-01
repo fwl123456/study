@@ -47,6 +47,8 @@ Rails.application.routes.draw do
       post 'restore'
       get 'previous'
       get 'next'
+      put 'like'
+      put 'unlike'
     end
  	end
 
