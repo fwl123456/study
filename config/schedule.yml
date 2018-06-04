@@ -1,0 +1,4 @@
+hard_test_job:
+  cron: "*/1 * * * *" # 每天凌晨2点执行一次
+  class: "HardTestJob"
+  queue: default

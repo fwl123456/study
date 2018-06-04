@@ -1,4 +1,7 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   resources :labels
   # 用户资源
   # resources :users
@@ -55,4 +58,5 @@ Rails.application.routes.draw do
 
   root to: 'articles#index' # 告诉Rails对根路径的访问请求应该发往articles控制器的index动作
   #root to: 'user#show'
+  
 end

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -75,3 +75,7 @@ gem 'cancancan'
 gem 'mina'
 # gem 'mina-sidekiq', require: false
 gem 'mina-puma', require: false
+# 后台定时任务
+gem 'sidekiq'
+gem 'sidekiq-cron'
+gem 'rufus-scheduler', '~> 3.4.0'

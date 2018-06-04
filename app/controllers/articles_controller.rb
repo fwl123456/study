@@ -34,8 +34,9 @@ class ArticlesController < ApplicationController
   # 软删除列表
   def deleted
     @articles = Article.deleted
-    @articles = @articles.order(created_at: params[:order]) unless params[:order].blank?  
+    # @articles = @articles.order(created_at: params[:order]) unless params[:order].blank?  
     @articles = Label.find(params[:label_id]).articles unless params[:label_id].blank?
+    @articles = Article.deleted.order(deleted_at: params[:order]) unless params[:order].blank?
     @articles = @articles.order(position: :desc)
     @articles = @articles.page(params[:page])
   end

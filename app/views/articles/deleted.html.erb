@@ -6,9 +6,9 @@
     <th>删除时间:</th>
     <th>文章标签:</th>
     <!-- 点击时间后↓, 发送desc参数到articles控制层 -->
-    <th id= 'aaa'><%= link_to '时间↓', articles_path(order: :desc)%></th> 
+    <th id= 'aaa'><%= link_to '时间↓', deleted_articles_path(order: :desc)%></th> 
     <!-- 点击时间后,  发送asc参数到articles控制层 -->
-    <th id= 'ccc'><%= link_to '时间↑', articles_path(order: :asc) %></th>
+    <th id= 'ccc'><%= link_to '时间↑', deleted_articles_path(order: :asc) %></th>
     <th id="bbb">浏览量:</th>
     <th colspan="3"></th>
   </tr><br/>

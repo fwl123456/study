@@ -107,14 +107,16 @@ RSpec.describe Article, type: :model do
       expect(@article2.position).to eq 3
     end
 
-    # it '文章上移' do
-    #   @article1.move_higher
-    #   @article1.move_higher
-    #   @article1.move_higher
-    #   expect(@article1.position).to eq 1
-    #   @article2.move_higher
-    #   expect(@article1.position).to eq 1
-    # end
+    it '文章7天后自动删除' do
+      @article.destroy
+      @article1.destroy
+      @article.update(deleted_at: @article.deleted_at - 7.days)
+      # 运行后台任务
+      HardTestJob.perform_now
+      expect(Article.deleted).to include @article1
+      expect(Article.deleted.count).to eq 1
+      expect(Article.count).to eq 1
+    end
 
   end
 end
