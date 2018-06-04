@@ -34,7 +34,9 @@ class Article
   end
   # 查看浏览过文章的所有人
   def select_readers
+    # 找到所有阅读者ids
     user_ids = $redis.smembers "article:#{self.id.to_s}:read_numbers"
+    # 通过ids找到所有阅读者
     self.readers = User.find(user_ids)
   end
 
