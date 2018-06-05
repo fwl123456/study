@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       end
   	end
   end
+  resources :answer, only: [:index]
 
   resources :articles do # 文章资源
     # 嵌套资源

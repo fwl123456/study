@@ -1,0 +1,30 @@
+<h1>智能问答</h1>
+<form action="/answer" method="get">
+     <span>请输入您想问的问题：</span><input type="string" name='question' style="height:20px;width:100px;" />
+     <!-- type规定提交类型，q是提交的参数 -->
+     <button type=s"submit">提问</button>
+</form>
+<img src="https://i.loli.net/2018/06/05/5b165869ebc36.png"  alt="我是小i机器人" style="height:300px;width:310px;" /></br>
+<h3><span class="aaa">回答:</span></h3>&nbsp
+<span class="bbb"><%= @answer %></span></br>
+
+<style type="text/css">
+  .aaa {
+    margin: 0px;
+  }
+
+  .bbb {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+    -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+    -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+    -webkit-background-size: 200% 100%; 
+    -webkit-animation: masked-animation 4s linear infinite;
+    font-size: 35px;
+
+  }
+</style>
