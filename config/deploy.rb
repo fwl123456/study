@@ -12,7 +12,7 @@ require 'mina/puma'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :application_name, 'study'
-set :domain, '114.116.25.119'
+set :domain, '47.96.113.216'
 set :deploy_to, '/var/www/study'
 set :repository, 'https://github.com/fwl123456/study.git'
 set :branch, 'master'
